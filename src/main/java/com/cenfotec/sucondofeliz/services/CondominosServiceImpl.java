@@ -14,6 +14,8 @@ import java.util.Optional;
 public class CondominosServiceImpl implements CondominosService{
     @Autowired
     CondominosRepository repo;
+    @Autowired
+    CondominioService condoService;
 
     @Override
     public Optional<Condomino> save(Condomino condomino) {
@@ -67,7 +69,7 @@ public class CondominosServiceImpl implements CondominosService{
         condomino.setNombre(nombre);
         condomino.setCedula(cedula);
         condomino.setEstado("Condomino");
-        condomino.setCondominio(null);
+        condomino.setCondominio(condoService.findById(condominio).get());
         return this.repo.save(condomino);
     }
 
